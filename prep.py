@@ -1,5 +1,6 @@
 import os
 import json
+import shutil
 
 #make paths
 directory = f'Day {input("What day is it: ")}'
@@ -28,3 +29,7 @@ open(f'{star1}\\realinput.txt', 'w').write(realInput)
 open(f'{star2}\\realinput.txt', 'w').write(realInput)
 os.remove(f'{path}\\testinput.txt')
 os.remove(f'{path}\\realinput.txt')
+
+#copy python template
+shutil.copyfile('template.py', f'{star1}\\main.py')
+shutil.copyfile('template.py', f'{star2}\\main.py')
