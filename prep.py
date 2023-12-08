@@ -1,9 +1,10 @@
 import os
 import json
-import shutil
+import re
 
 #make paths
-directory = f'Day {input("What day is it: ")}'
+day = input("What day is it: ")
+directory = f'Day {day}'
 parent_dir = json.load(open('prep.json'))['parent']
 path = os.path.join(parent_dir, directory)
 
@@ -31,5 +32,7 @@ os.remove(f'{path}\\testinput.txt')
 os.remove(f'{path}\\realinput.txt')
 
 #copy python template
-shutil.copyfile('template.py', f'{star1}\\main.py')
-shutil.copyfile('template.py', f'{star2}\\main.py')
+template = open('template.txt', 'r').read()
+
+open(f'{star1}\\main.py', 'w').write(re.sub('DATE', day, re.sub('STAR', '1', template)))
+open(f'{star2}\\main.py', 'w').write(re.sub('DATE', day, re.sub('STAR', '2', template)))
