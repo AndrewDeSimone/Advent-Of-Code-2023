@@ -1,10 +1,13 @@
 import os
 import json
 import re
+from datetime import timezone
+from datetime import datetime
+
 
 #make paths
-day = input("What day is it: ")
-directory = f'Day {day}'
+date = str(int(datetime.now(timezone.utc).strftime('%d')))
+directory = f'Day {date}'
 parent_dir = json.load(open('prep.json'))['parent']
 path = os.path.join(parent_dir, directory)
 
@@ -34,5 +37,5 @@ os.remove(f'{path}\\realinput.txt')
 #copy python template
 template = open('template.txt', 'r').read()
 
-open(f'{star1}\\main.py', 'w').write(re.sub('DATE', day, re.sub('STAR', '1', template)))
-open(f'{star2}\\main.py', 'w').write(re.sub('DATE', day, re.sub('STAR', '2', template)))
+open(f'{star1}\\main.py', 'w').write(re.sub('DATE', date, re.sub('STAR', '1', template)))
+open(f'{star2}\\main.py', 'w').write(re.sub('DATE', date, re.sub('STAR', '2', template)))
