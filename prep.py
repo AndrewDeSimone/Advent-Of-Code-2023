@@ -11,7 +11,6 @@ directory = f'Day {date}'
 parent_dir = json.load(open('prep.json'))['parent']
 path = os.path.join(parent_dir, directory)
 
-print(path)
 star1 = os.path.join(path, 'star1')
 star2 = os.path.join(path, 'star2')
 os.mkdir(path)
