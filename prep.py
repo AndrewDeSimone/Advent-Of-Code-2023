@@ -26,6 +26,8 @@ testInput = open(f'{path}\\testinput.txt', 'r').read()
 open(f'{star1}\\testinput.txt', 'w').write(testInput)
 open(f'{star2}\\testinput.txt', 'w').write(testInput)
 realInput = requests.get(f'https://adventofcode.com/2023/day/{date}/input', cookies={'_ga': json.load(open('prep.json'))['cookies']}).text
+#remove new line
+realInput = realInput[:len(realInput)-1]
 open(f'{star1}\\realinput.txt', 'w').write(realInput)
 open(f'{star2}\\realinput.txt', 'w').write(realInput)
 os.remove(f'{path}\\testinput.txt')
