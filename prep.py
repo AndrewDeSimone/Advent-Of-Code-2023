@@ -3,7 +3,7 @@ import json
 import re
 from datetime import timezone
 from datetime import datetime
-
+import requests
 
 #make paths
 date = str(int(datetime.now(timezone.utc).strftime('%d')))
@@ -20,18 +20,15 @@ os.mkdir(star2)
 #add test data
 file = open(f'{path}\\testinput.txt', 'w')
 file.close()
-file = open(f'{path}\\realinput.txt', 'w')
-file.close()
 input('Press enter after adding data')
 
 testInput = open(f'{path}\\testinput.txt', 'r').read()
 open(f'{star1}\\testinput.txt', 'w').write(testInput)
 open(f'{star2}\\testinput.txt', 'w').write(testInput)
-realInput = open(f'{path}\\realinput.txt', 'r').read()
+realInput = requests.get(f'https://adventofcode.com/2023/day/{date}/input', cookies={'_ga': json.load(open('prep.json'))['cookies']}).text
 open(f'{star1}\\realinput.txt', 'w').write(realInput)
 open(f'{star2}\\realinput.txt', 'w').write(realInput)
 os.remove(f'{path}\\testinput.txt')
-os.remove(f'{path}\\realinput.txt')
 
 #copy python template
 template = open('template.txt', 'r').read()
