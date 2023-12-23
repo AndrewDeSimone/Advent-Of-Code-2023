@@ -4,9 +4,12 @@ import re
 from datetime import timezone
 from datetime import datetime
 import requests
+import sys
 
 #make paths
 date = str(int(datetime.now(timezone.utc).strftime('%d')))
+if len(sys.argv) >= 2:
+    date = sys.argv[1]
 directory = f'Day {date}'
 parent_dir = json.load(open('prep.json'))['parent']
 path = os.path.join(parent_dir, directory)
