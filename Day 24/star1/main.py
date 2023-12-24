@@ -1,3 +1,4 @@
+import numpy as np
 class hailstone:
     def __init__(self, sx, sy, sz, vx, vy, vz):
         self.sx = sx
@@ -26,15 +27,15 @@ count = 0
 
 for i, stone1 in enumerate(hailstones):
  for stone2 in hailstones[:i]:
-    a1, b1, c1 = stone1.a, stone1.b, stone1.c
-    a2, b2, c2 = stone2.a, stone2.b, stone2.c
-    if a1*b2 == a2*b1:
+    A = np.array([[stone1.a, stone1.b],[stone2.a, stone2.b]])
+    B = np.array([[stone1.c], [stone2.c]])
+    if np.linalg.det(A) == 0:
        continue
-    x = (c1*b2 - c2*b1)/(a1*b2 - a2*b1)
-    y = (a2*c1 - a1*c2)/(b1*a2 - a1*b2)
-    if testMin <= x <= testMax and testMin <= y <= testMax:
-        if (x - stone1.sx) * stone1.vx >= 0 and (y - stone1.sy) * stone1.vy >= 0:
-            if (x - stone2.sx) * stone2.vx >= 0 and (y - stone2.sy) * stone2.vy >= 0:\
+    x, y = np.dot(np.linalg.inv(A), B).flatten()
+    if testMin < x < testMax and testMin < y < testMax:
+       if (x - stone1.sx) * stone1.vx >= 0 and (y - stone1.sy) * stone1.vy >= 0:
+            if (x - stone2.sx) * stone2.vx >= 0 and (y - stone2.sy) * stone2.vy >= 0:
                 count+=1
+    
 
 print(count)
